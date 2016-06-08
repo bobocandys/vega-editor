@@ -16,5 +16,5 @@
           "type":"geojson"
        }
     },
-    "config": {"cell": {"width": 900, "height": 500}}
+    "config": {"cell": {"width": 800, "height": 500}}
 }
