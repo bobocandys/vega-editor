@@ -1,7 +1,8 @@
 {
   "layers": [{
     "data":{
-     "url":"data/us-10m.json", "format": {"type": "topojson", "feature": "counties"}
+     "url":"data/us-10m.json",
+     "format": {"type": "topojson", "feature": "counties"}
     },
     "mark":"path",
     "projection":{
