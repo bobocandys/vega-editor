@@ -34,6 +34,9 @@
                 "transform": {
                     "$ref": "#/definitions/Transform"
                 },
+                "projection": {
+                    "$ref": "#/definitions/Projection"
+                },
                 "config": {
                     "$ref": "#/definitions/Config"
                 }
@@ -53,7 +56,8 @@
                 "tick",
                 "rule",
                 "circle",
-                "square"
+                "square",
+                "path"
             ]
         },
         "Encoding": {
@@ -104,6 +108,9 @@
                 "label": {
                     "$ref": "#/definitions/FieldDef"
                 },
+                "geopath": {
+                    "$ref": "#/definitions/FieldDef"
+                },
                 "path": {
                     "oneOf": [
                         {
@@ -141,7 +148,7 @@
                             "type": "boolean"
                         },
                         {
-                            "$ref": "#/definitions/AxisProperties"
+                            "$ref": "#/definitions/Axis"
                         }
                     ]
                 },
@@ -186,7 +193,7 @@
                             "type": "boolean"
                         },
                         {
-                            "$ref": "#/definitions/BinProperties",
+                            "$ref": "#/definitions/Bin",
                             "description": "Binning properties or boolean flag for determining whether to bin data or not."
                         }
                     ]
@@ -199,7 +206,7 @@
                 }
             }
         },
-        "AxisProperties": {
+        "Axis": {
             "type": "object",
             "properties": {
                 "labelAngle": {
@@ -552,7 +559,10 @@
                 "quantitative",
                 "ordinal",
                 "temporal",
-                "nominal"
+                "nominal",
+                "geojson",
+                "longitude",
+                "latitude"
             ]
         },
         "TimeUnit": {
@@ -580,7 +590,7 @@
                 "secondsmilliseconds"
             ]
         },
-        "BinProperties": {
+        "Bin": {
             "type": "object",
             "properties": {
                 "min": {
@@ -628,7 +638,7 @@
             "type": "object",
             "properties": {
                 "legend": {
-                    "$ref": "#/definitions/LegendProperties"
+                    "$ref": "#/definitions/Legend"
                 },
                 "scale": {
                     "$ref": "#/definitions/Scale"
@@ -671,7 +681,7 @@
                             "type": "boolean"
                         },
                         {
-                            "$ref": "#/definitions/BinProperties",
+                            "$ref": "#/definitions/Bin",
                             "description": "Binning properties or boolean flag for determining whether to bin data or not."
                         }
                     ]
@@ -684,7 +694,7 @@
                 }
             }
         },
-        "LegendProperties": {
+        "Legend": {
             "type": "object",
             "properties": {
                 "format": {
@@ -828,7 +838,7 @@
                             "type": "boolean"
                         },
                         {
-                            "$ref": "#/definitions/BinProperties",
+                            "$ref": "#/definitions/Bin",
                             "description": "Binning properties or boolean flag for determining whether to bin data or not."
                         }
                     ]
@@ -875,7 +885,7 @@
                             "type": "boolean"
                         },
                         {
-                            "$ref": "#/definitions/BinProperties",
+                            "$ref": "#/definitions/Bin",
                             "description": "Binning properties or boolean flag for determining whether to bin data or not."
                         }
                     ]
@@ -891,8 +901,19 @@
         "Data": {
             "type": "object",
             "properties": {
-                "formatType": {
-                    "$ref": "#/definitions/DataFormat"
+                "format": {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "$ref": "#/definitions/DataFormat"
+                        },
+                        "feature": {
+                            "type": "string"
+                        },
+                        "mesh": {
+                            "type": "string"
+                        }
+                    }
                 },
                 "url": {
                     "type": "string"
@@ -909,7 +930,8 @@
             "enum": [
                 "json",
                 "csv",
-                "tsv"
+                "tsv",
+                "topojson"
             ]
         },
         "Transform": {
@@ -949,6 +971,39 @@
                 "expr"
             ]
         },
+        "Projection": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "center": {
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                },
+                "translate": {
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                },
+                "zoom": {
+                    "type": "number"
+                },
+                "rotate": {
+                    "description": "The rotation of the projection.",
+                    "type": "number"
+                },
+                "precision": {
+                    "type": "number"
+                },
+                "clipAngle": {
+                    "type": "number"
+                }
+            }
+        },
         "Config": {
             "type": "object",
             "properties": {
@@ -982,6 +1037,9 @@
                 },
                 "legend": {
                     "$ref": "#/definitions/LegendConfig"
+                },
+                "projection": {
+                    "$ref": "#/definitions/Projection"
                 },
                 "facet": {
                     "$ref": "#/definitions/FacetConfig"
@@ -1694,6 +1752,9 @@
                 "transform": {
                     "$ref": "#/definitions/Transform"
                 },
+                "projection": {
+                    "$ref": "#/definitions/Projection"
+                },
                 "config": {
                     "$ref": "#/definitions/Config"
                 }
@@ -1735,6 +1796,9 @@
                 "transform": {
                     "$ref": "#/definitions/Transform"
                 },
+                "projection": {
+                    "$ref": "#/definitions/Projection"
+                },
                 "config": {
                     "$ref": "#/definitions/Config"
                 }
@@ -1763,6 +1827,9 @@
                 },
                 "transform": {
                     "$ref": "#/definitions/Transform"
+                },
+                "projection": {
+                    "$ref": "#/definitions/Projection"
                 },
                 "config": {
                     "$ref": "#/definitions/Config"
@@ -1812,6 +1879,9 @@
                     "$ref": "#/definitions/FieldDef"
                 },
                 "label": {
+                    "$ref": "#/definitions/FieldDef"
+                },
+                "geopath": {
                     "$ref": "#/definitions/FieldDef"
                 },
                 "path": {
