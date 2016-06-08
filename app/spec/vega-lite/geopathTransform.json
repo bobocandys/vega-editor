@@ -1,7 +1,7 @@
 {
      "data":{
      "url":"data/us-10m.json",
-     "format": {"type": "topojson", "feature": "states"}
+     "format": {"type": "topojson", "feature": "counties"}
     },
     "mark":"path",
     "projection":{
